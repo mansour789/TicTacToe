@@ -15,14 +15,15 @@ body{
     font-size: 80px;
     text-align: center;
     margin-bottom: 0;
-    
+    text-decoration: underline;
+    /* display: none; */
 }
 h2{
     color: rgb(247, 243, 243);
     font-weight: 900;
     text-align: center;
-    text-decoration: underline;
-    
+    line-height: 2em;
+    /* display: none; */
 }
 span{
     
@@ -30,7 +31,7 @@ span{
 }
 
 #board{
-    
+    display: none;
     width: 320px;
     height: 320px;
     position: absolute;
@@ -57,13 +58,50 @@ span{
     display: none;
     width: 80%;
     height: 80%;
-    opacity: 0;
+    opacity: 0.5;
     position: absolute;
     top: 50%;
     left: 50%;
     margin-top: -200px;
     margin-left: -300px;
-    transition: width 2s, height 2s, transform 2s;
+    transition: width 4s, height 4s, transform 4s;
+    
+}
+.one{
+    
+    margin-left: -800px;
+}
+.two{
+    margin-top: -500px;
+    margin-left: -500px;
+}
+.three{
+    margin-top: 200px;
+    margin-left: -300px;
+    width: 50%;
+    height: 50%;
+}
+.win{
+    display: none;
+    opacity: 1;
+    margin-top: 50px ;
 }
 
+#intro{
+    display: none;
+}
+.audio{
+    display: none;
+}
+.playBtn{
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    font-size: 80px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 30px;
+    padding: 10px 30px;
+    font-family: 'Barriecito', cursive;
+}
 

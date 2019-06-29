@@ -5,17 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=Barriecito&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="animation.css">
+    <link rel="stylesheet" href="animate.css">
     <link rel="stylesheet" href="style.css">
     <title>hh</title>
 </head>
 <body>
     <header>
-        <h1 class="title">Tic Tac Toe</h1>
-        <h2>"There Are Many Ways To Skin a Cat" <span>'UB'</span></h2>
+        <h1 class="title animated fadeInDownBig">Tic Tac Toe</h1>
+        <h2 class="animated fadeInLeftBig">In a different world full of Cats and Vikings the wise man has said:<br> <span> "THERE'S MORE THAN ONE WAY TO SKIN A CAT" "U.B"</span>
+               <br> Try to rescue this cat from a powerful Viking. </h2>
+        <button class="playBtn animated fadeInUpBig">PLAY</button>
+        <audio id="intro" src="audio/intro.mp3" loop="loop" autoplay="autoplay"></audio>
     </header>
     
-        <main id="board">
+        <main id="board" class="animated zoomIn">
             <div id="n00" class="box" ><img /></div>
             <div id="n01" class="box" ><img /></div>
             <div id="n02" class="box" ><img /></div>
@@ -29,7 +32,21 @@
             <div id="n22" class="box" ><img /></div>
             
         </main>
-        <img class="viking" src="images/blood.png">
+        <section class="endingGame">
+           
+        <img class="viking animated fadeIn" src="images/blood.png">
+        <img class="viking one animated fadeIn" src="images/blood.png">
+        <img class="viking two animated fadeIn" src="images/blood.png">
+        <img class="viking three animated fadeIn" src="images/blood.png">
+        <h1 class="title win animated fadeIn"></h1>
+   
+    </section>
+    <section class="audio">
+            <audio id="sword" src="audio/swordClick.mp3"></audio>
+            <audio id="swordLast" src="audio/lastSword.mp3"></audio>
+            <audio id="cat" src="audio/cat.mp3"></audio>
+            <audio id="catLast" src="audio/catLast.mp3" loop="loop"></audio>
+    </section>
     <script src="app.js"></script>
 </body>
 </html>
