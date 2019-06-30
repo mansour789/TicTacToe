@@ -14,9 +14,13 @@
         <h1 class="title animated fadeInDownBig">Tic Tac Toe</h1>
         <h2 class="animated fadeInLeftBig">In a different world full of Cats and Vikings the wise man has said:<br> <span> "THERE'S MORE THAN ONE WAY TO SKIN A CAT" "U.B"</span>
                <br> Try to rescue this cat from a powerful Viking. </h2>
-        <button class="playBtn animated fadeInUpBig">PLAY</button>
-        <audio id="intro" src="audio/intro.mp3" loop="loop" autoplay="autoplay"></audio>
+        
     </header>
+
+    
+    <iframe src="audio/intro.mp3" allow="autoplay" style="display:none" id="intro">
+        </iframe> 
+        
     
         <main id="board" class="animated zoomIn">
             <div id="n00" class="box" ><img /></div>
@@ -34,13 +38,15 @@
         </main>
         <section class="endingGame">
            
-        <img class="viking animated fadeIn" src="images/blood.png">
-        <img class="viking one animated fadeIn" src="images/blood.png">
-        <img class="viking two animated fadeIn" src="images/blood.png">
-        <img class="viking three animated fadeIn" src="images/blood.png">
-        <h1 class="title win animated fadeIn"></h1>
+        <img class="viking" src="images/blood.png">
+        <img class="viking one" src="images/blood.png">
+        <img class="viking two" src="images/blood.png">
+        <img class="viking three" src="images/blood.png">
+        <h1 class="title win"></h1>
    
     </section>
+    <button class="playBtn animated fadeInUpBig">PLAY</button>
+    <button class="playBtnAgain animated fadeInUpBig">PLAY AGAIN</button>
     <section class="audio">
             <audio id="sword" src="audio/swordClick.mp3"></audio>
             <audio id="swordLast" src="audio/lastSword.mp3"></audio>

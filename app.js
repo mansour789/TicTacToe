@@ -1,21 +1,45 @@
-
-
+const start = performance.now();
+//== the main array==//
 let bord = [
     [0,0,0],
     [0,0,0],
     [0,0,0]
 ];
 
+//==storing the elements that we want to edit==//
+
+//background music//
+let intro = document.querySelector('#intro');
+
+//win message//
+let win = document.querySelector(".win");
+
+//array of blood images//
 const viking = document.querySelectorAll('.viking');
+
+//header section//
 const header = document.querySelector('header');
+
+//tic tac title//
+const title = document.querySelector('header h1');
+
+//sounds effect//
 const sword = document.querySelector('#sword');
 const swordLast = document.querySelector('#swordLast');
 const cat = document.querySelector('#cat');
 const catLast = document.querySelector('#catLast');
 
-const playBtn = document.querySelector(".playBtn");
-playBtn.addEventListener('click', startGame);
 
+//play button//
+const playBtn = document.querySelector(".playBtn");
+//play Again button//
+const playBtnAgain = document.querySelector('.playBtnAgain');
+
+
+
+//==storing parent div==//
+const board = document.querySelector('#board');
+//==storing children div==//
 const q1 = document.querySelector('#n00');
 const q2 = document.querySelector('#n01');
 const q3 = document.querySelector('#n02');
@@ -28,63 +52,104 @@ const q7 = document.querySelector('#n20');
 const q8 = document.querySelector('#n21');
 const q9 = document.querySelector('#n22');
 
-const board = document.querySelector('#board');
-
-q1.addEventListener('click', drop);
-q2.addEventListener('click', drop);
-q3.addEventListener('click', drop);
-q4.addEventListener('click', drop);
-q5.addEventListener('click', drop);
-q6.addEventListener('click', drop);
-q7.addEventListener('click', drop);
-q8.addEventListener('click', drop);
-q9.addEventListener('click', drop);
 
 
 
 
 
-let playerTurn = true;
-
-function drop(){
-    let divPressed = this.id;
-    let image = document.querySelector(`#${divPressed} img`);
-    
-    for(let i = 0; i < bord.length; i++){
-        for (let j = 0; j < bord[i].length; j++){
-            
-            if( `n${i}${j}` === divPressed){
-                    if(playerTurn){
-                         if(bord[i][j] === 0){
-                             bord[i][j] = "C"
-                             cat.play();
-                            image.setAttribute('src', 'images/cat.gif'); 
-                            playerTurn = false;
-                             winGame("C");
-                         }
-                    }else{
-                        if(bord[i][j] === 0){
-                              bord[i][j] = "V"
-                              sword.play();
-                            image.setAttribute('src', 'images/vikings.gif');
-                              playerTurn = true;
-                              winGame("V");
-                              
-                         }
-                    }
-            }
-
-        }
-        
-     }
 
 
+//==when click play button==//
+const startGame = function(){
+    //==remove the h2  text==//
+    document.querySelector('h2').classList = 'animated bounceOutRight';
+    //==display the board to play==//
+    board.style.display = 'block';
+    //==remove Play button==//
+    playBtn.classList += ' hinge';
+    //==change the music to be more scery!!==//
+    intro.setAttribute('src', 'audio/startGame.mp3')  
+}
+
+//==when click playAgain button==//
+const restart = function(){
+        window.location.reload(true);
 }
 
 
-function winGame(x){
+//===var for swiching turn==//
+let playerTurn = true;
+//===when player click for playing==//
+const drop = function(){
 
-    let win = document.querySelector(".win");
+    //==save the id of the div that clicked==//
+    let divPressed = this.id;
+
+    //==save the image of the div that clicked==//
+    let image = document.querySelector(`#${divPressed} img`);
+    
+    //==looping throughout the 2D array and getting the indx of the element inside the inner array==//
+
+    //==big array===//
+    for(let i = 0; i < bord.length; i++){
+        //==inner array==//
+        for (let j = 0; j < bord[i].length; j++){
+            //== here you need to see the div ID's to understand the code//
+            //==I gave each div an id of "n" and two numbers. //
+            //==the first number repreasent the index of the big array//
+            //==the seconde number represent the index of inner array//
+
+            //==check for the div that been clicked==//
+            if( `n${i}${j}` === divPressed){
+
+                //== if the Cat turn ==//
+                    if(playerTurn){
+                            //==if the spot has been clicked is empty==//
+                            if(bord[i][j] === 0){
+                                //==change the value of the element in the main array to be 'C'// 
+                                bord[i][j] = "C"
+                                //==play sound effect==//
+                                cat.play();
+                                //==set the image background to the div ===//
+                                image.setAttribute('src', 'images/cat.gif'); 
+                                //==swich turn==//
+                                playerTurn = false;
+                                //==calling the win function with "C" parameitat==//
+                                winGame("C");
+                            }//<--end of Cat turn==//
+
+                    }else{ //==if(playerTurn = false) means viking turn==//
+                        
+
+                        //==if the spot has been clicked is empty==//
+                        if(bord[i][j] === 0){
+                            //==change the value of the element in the main array to be 'V'// 
+                              bord[i][j] = "V"
+                              //==play sound effect==//
+                              sword.play();
+                              //==set the image background to the div ===//
+                              image.setAttribute('src', 'images/vikings.gif');
+                              //==swich turn==//
+                              playerTurn = true;
+                              //==calling the win function with "C" parameitat==//
+                              winGame("V");
+                              
+                         }//<--end of Vikings turn==//
+                    }
+            }//<--end of the if statment==//
+
+        }//<--end of the inner loop==//
+        
+     }//<--end of the big loop==//
+
+
+}//--end of the function==//
+
+
+
+//====checking to win or drow===//
+const winGame = function(whoPlaying){  
+    //====All caces of wining ====//
 
     if( (bord[0][0] !== 0 && bord[0][0] === bord[0][1] && bord[0][0] === bord[0][2]) || 
         (bord[1][0] !== 0 && bord[1][0] === bord[1][1] && bord[1][0] === bord[1][2]) ||                           
@@ -98,81 +163,99 @@ function winGame(x){
         (bord[0][2] !== 0 && bord[0][2] === bord[1][1] && bord[0][2] === bord[2][0])
          
      ){
-         if ( x === 'V'){
-            swordLast.play();
-            header.style.display = 'none';
-            board.style.opacity = '0.6';
-            win.innerText = `Viking has killed another cat`;
-            win.style.display = 'block';
+            //==if vikings win===//
+            if ( whoPlaying === 'V'){
+                //====sound effect==//
+                swordLast.play();
+                //===remove title===//
+                header.style.display = 'none';
+                //== set opcity of 'X,O' table to 0.6=====//
+                board.style.opacity = '0.6';
+                //===change text of win message then display it==//
+                win.innerText = `Viking has killed another cat`;
+                win.style.display = 'block';
+                //===calling the fadeOut function ===//
+                setTimeout(fadeOut, 100);
             
-            setTimeout(fadeOut, 100);
-         }
-         if( x === 'C'){
-             document.querySelector('html').style.background = 'url(images/catWin.jpg) no-repeat center center fixed'
-            document.querySelector('html').style.backgroundSize = 'cover'
-             catLast.play();
-            header.style.display = 'none';
-            win.innerText = `one more cat just survived`;
-            win.style.color = 'red';
-            win.style.display = 'block';
-            
+                 }
 
-         }
-        console.log(`${x} win`);
-
-        for (let i = 0; i < bord.length; i++) {
-            for (let j = 0; j < bord[i].length; j++) {
-                    bord[i][j] = 0;
+                 //==if cat win===//
+            if( whoPlaying === 'C'){
+                //===cahnge background image and edit the style====//
+                document.querySelector('html').style.background = 'url(images/catWin.jpg) no-repeat center center fixed';
+                document.querySelector('html').style.backgroundSize = 'cover';
+                //===stope the background music====//
+                intro.setAttribute('src', ' ');
+                //===play the cat soung===//
+                catLast.play();
+                //===remove title===//
+                header.style.display = 'none';
+                //===change text and color of win message then display it==//
+                win.innerText = `one more cat just survived`;
+                win.style.color = 'red';
+                win.style.display = 'block';
                 
             }
-            
-        }
-     }
-           
-    
-    } 
+         //===display play again button===//
+         playBtnAgain.style.display = 'block';  
+     }//<--end of checking all caces of win==// 
 
+     //==check if the game is Draw==//
+
+     if (bord[0][0] && bord[0][1] && bord[0][2] && 
+         bord[1][0] && bord[1][1] && bord[1][2] && 
+         bord[2][0] && bord[2][1] && bord[2][2] !== 0 ){
+           //===remove title===// 
+        header.style.display = 'none';
+        //===change text and color of win message then display it==//
+        win.style.color = '#B5EDF9';
+        win.innerText = `It's a Draw!`;
+        win.style.display = 'block';
+        //===display play again button===//
+        playBtnAgain.style.display = 'block';
+
+     }//<--end of draw checking====//
+
+ } //<-- end of the win function===//
+
+
+    //=====This fuction to let the blood fade out When Viking win===//
     const fadeOut = function(){
-        
+        //====because it is more than one image we handle it as array===//
         for (let i = 0; i < viking.length; i++) {
-            viking[i].style.display = "block";
-            const currentOpacity = getComputedStyle(viking[i]).opacity;
-            const currentOpcFloat = parseFloat(currentOpacity);
-    
-        let newOpacity = currentOpcFloat + 0.0001;
-    
-        viking[i].style.opacity = newOpacity;
-    
-        if (currentOpcFloat <= 0.5) {
-            setTimeout(fadeOut, 10);    
-        }
 
+                viking[i].style.display = "block";
+                //===get the opacity as string==//
+                const currentOpacity = getComputedStyle(viking[i]).opacity;
+                //===convert it to a float==//
+                const currentOpcFloat = parseFloat(currentOpacity);
+                //==increace the opacity and save it to variable===//
+                 let newOpacity = currentOpcFloat + 0.0001;
+                //==change to new opacity==//
+                viking[i].style.opacity = newOpacity;
+                //==keeping incrace opacity intell reach 0.4==//
+                if (currentOpcFloat <= 0.4) {
+                    setTimeout(fadeOut, 10);    
+                }
 
         }
-        
-        
-    
     }
 
-    let into = document.querySelector('#intro');
-    function audio(){
-    var playAudio = document.querySelector('#intro').play();
 
-    if (playAudio !== undefined) {
-        playAudio.then(_ => {
-        into.play();
-      })
-      .catch(error => {
-        console.log(error);
-      });
-    }  
+    //==adding th click event to the buttons==//
+    playBtn.addEventListener('click', startGame);
+    playBtnAgain.addEventListener('click', restart);
+   
+   //==adding click event to the div's==//
+    q1.addEventListener('click', drop);
+    q2.addEventListener('click', drop);
+    q3.addEventListener('click', drop);
+    q4.addEventListener('click', drop);
+    q5.addEventListener('click', drop);
+    q6.addEventListener('click', drop);
+    q7.addEventListener('click', drop);
+    q8.addEventListener('click', drop);
+    q9.addEventListener('click', drop);
+    const end = performance.now();
 
-}
-
-
-function startGame(){
-    document.querySelector('h2').style.display = 'none';
-    board.style.display = 'block';
-    playBtn.classList += ' hinge';
-    
-}
+    console.log(end - start);
