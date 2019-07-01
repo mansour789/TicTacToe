@@ -136,4 +136,72 @@ span{
 }
 
 
+@media(max-width: 480px){
 
+    .title{
+        /* display: none; */
+        font-size: 50px;
+        margin-left: -10%;
+    }
+    h2{
+        /* display: none; */
+        margin-top: 10%;
+        font-size: 18px;
+        padding: 10px;
+        width: 285px;
+    }
+    .playBtn{
+        /* display: none; */
+        margin-top: 10%;
+        margin-left: -25%;
+    }
+    #board{
+        margin-top: -40%;
+        width: 290px;
+        height: 290px;
+    }
+    .box{
+        
+        height: 90px;
+        width: 90px; 
+    }
+    .win{
+        
+        font-size: 40px;
+        padding: 0 15%;
+    }
+    .playBtnAgain{
+        font-size: 35px;
+        margin-left: -43%;
+        margin-top: 100%;
+    }
+    .score{
+        font-size: 27px;
+        margin-left: 15%;
+        margin-top: 120%;
+    }
+    .viking{
+        width: 80%;
+        height: 80%;
+        opacity: 0.5;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -200px;
+        margin-left: -300px;
+        transition: width 4s, height 4s, transform 4s;
+        
+    }
+    .one{
+        margin-left: -10%;
+    }
+    .two{
+        margin-top: 0;
+        margin-left: -40%;
+    }
+    .three{
+        margin-top: -50%;
+        margin-left: -80%;
+    }
+    
+}

@@ -58,11 +58,6 @@ const q8 = document.querySelector('#n21');
 const q9 = document.querySelector('#n22');
 
 //==scoreing===//
-// let catWinSaved = "cat";
-// let vikingWinSaved = 'viking';
-
-
-
 
 
 
@@ -184,7 +179,7 @@ const winGame = function(whoPlaying){
                 //== set opcity of 'X,O' table to 0.6=====//
                 board.style.opacity = '0.6';
                 //===change text of win message then display it==//
-                win.innerText = `Viking has killed another cat`;
+                win.innerText = `Viking has skined another cat`;
                 win.style.display = 'block';
                 
                 //===calling the fadeOut function ===//
