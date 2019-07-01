@@ -8,6 +8,10 @@ body{
     font-family: 'Barriecito', cursive;  
 }
 
+#intro{
+display:none
+}
+
 .title{
     color: rgb(248, 244, 244);
     font-weight: 900;
