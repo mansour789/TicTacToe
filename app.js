@@ -35,11 +35,16 @@ const playBtn = document.querySelector(".playBtn");
 //play Again button//
 const playBtnAgain = document.querySelector('.playBtnAgain');
 
+//==scoring title==//
+const score = document.querySelector('.score');
+//==store the cat and viking score===//
+let catScore = document.querySelector('#catScore');
+let vikingScore = document.querySelector('#vikingScore');
 
 
 //==storing parent div==//
 const board = document.querySelector('#board');
-//==storing children div==//
+//==storing div's children of the parent div==//
 const q1 = document.querySelector('#n00');
 const q2 = document.querySelector('#n01');
 const q3 = document.querySelector('#n02');
@@ -52,7 +57,9 @@ const q7 = document.querySelector('#n20');
 const q8 = document.querySelector('#n21');
 const q9 = document.querySelector('#n22');
 
-
+//==scoreing===//
+// let catWinSaved = "cat";
+// let vikingWinSaved = 'viking';
 
 
 
@@ -68,7 +75,8 @@ const startGame = function(){
     //==remove Play button==//
     playBtn.classList += ' hinge';
     //==change the music to be more scery!!==//
-    intro.setAttribute('src', 'audio/startGame.mp3')  
+    intro.setAttribute('src', 'audio/startGame.mp3') ;
+    score.style.display =  'none'; 
 }
 
 //==when click playAgain button==//
@@ -145,11 +153,15 @@ const drop = function(){
 
 }//--end of the function==//
 
+let catWin =0;
+let vikingWin = 0;
+let catStorage
 
 
 //====checking to win or drow===//
 const winGame = function(whoPlaying){  
     //====All caces of wining ====//
+    
 
     if( (bord[0][0] !== 0 && bord[0][0] === bord[0][1] && bord[0][0] === bord[0][2]) || 
         (bord[1][0] !== 0 && bord[1][0] === bord[1][1] && bord[1][0] === bord[1][2]) ||                           
@@ -174,9 +186,22 @@ const winGame = function(whoPlaying){
                 //===change text of win message then display it==//
                 win.innerText = `Viking has killed another cat`;
                 win.style.display = 'block';
+                
                 //===calling the fadeOut function ===//
                 setTimeout(fadeOut, 100);
-            
+                //==Adding score==;;
+                
+                //==checking if there score that been saved===//
+                    if (sessionStorage.getItem('scoreSavedV') == undefined){
+                        //===if there no saved score make score =  1====//
+                        sessionStorage.setItem("scoreSavedV", '1');
+                    }else{
+                        //==if there is a saved score get the score and add 1 to it====//
+                        let VS = sessionStorage.getItem('scoreSavedV');
+                        let VI = parseInt(VS) + 1;
+                        sessionStorage.setItem('scoreSavedV', VI.toString());
+                    }
+                
                  }
 
                  //==if cat win===//
@@ -194,10 +219,28 @@ const winGame = function(whoPlaying){
                 win.innerText = `one more cat just survived`;
                 win.style.color = 'red';
                 win.style.display = 'block';
-                
+                //==Adding score==//
+                //==checking if there score that been saved===//
+                if( sessionStorage.getItem('scoreSavedC') == undefined){
+                    //===if there no saved score make score =  1====//
+                    sessionStorage.setItem("scoreSavedC", '1');
+                }else{
+                    //==if there is a saved score get the score and add 1 to it====//
+                        let CS = sessionStorage.getItem('scoreSavedC');
+                        let CI = parseInt(CS) + 1;
+                        sessionStorage.setItem('scoreSavedC', CI.toString());
+                }
+               
             }
+
+        
          //===display play again button===//
          playBtnAgain.style.display = 'block';  
+         //==edit the score==//
+         catScore.innerText = sessionStorage.getItem('scoreSavedC');
+         vikingScore.innerText = sessionStorage.getItem('scoreSavedV');
+         //==display the score==//
+         score.style.display = "block";
      }//<--end of checking all caces of win==// 
 
      //==check if the game is Draw==//
@@ -242,6 +285,7 @@ const winGame = function(whoPlaying){
     }
 
 
+
     //==adding th click event to the buttons==//
     playBtn.addEventListener('click', startGame);
     playBtnAgain.addEventListener('click', restart);
@@ -256,6 +300,9 @@ const winGame = function(whoPlaying){
     q7.addEventListener('click', drop);
     q8.addEventListener('click', drop);
     q9.addEventListener('click', drop);
+    
+    
+    
     const end = performance.now();
 
     console.log(end - start);

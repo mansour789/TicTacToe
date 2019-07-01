@@ -112,7 +112,7 @@ span{
     display: none;
     position: absolute;
     top: 25%;
-    left: 35%;
+    left: 60%;
     font-size: 80px;
     color: white;
     background-color: rgba(0, 0, 0, 0.5);
@@ -120,4 +120,20 @@ span{
     padding: 10px 30px;
     font-family: 'Barriecito', cursive;
 }
+
+
+.score{
+    display: none;
+    position: absolute;
+    top: 25%;
+    left: 1%;
+    font-size: 80px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 30px;
+    padding: 10px 30px;
+    font-family: 'Barriecito', cursive;
+}
+
+
 
