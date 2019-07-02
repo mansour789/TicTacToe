@@ -81,7 +81,9 @@ const restart = function () {
     window.location.reload(true);
 }
 
-
+//==check of AI mode working===//
+let AI = false;
+let conter = 0;
 //===var for swiching turn==//
 let playerTurn = true;
 //===when player click for playing==//
@@ -112,10 +114,19 @@ const drop = function () {
                     if (bord[i][j] === 0) {
                         //==change the value of the element in the main array to be 'C'// 
                         bord[i][j] = "C";
-                        //==calling the clicking function==//
-                        clicking(cat, false, "C")
                         //==set the image background to the div ===//
                         image.setAttribute('src', 'images/cat.gif');
+
+                        conter++;
+                        //==calling the clicking function==//
+                        if(!AI){
+                        clicking(cat, false);
+                          }else{
+                            clicking(cat, true) ;
+                            aifunction();
+                          }
+                          
+                        
                     }//<--end of Cat turn==//
 
                 } else { //==if(playerTurn = false) means viking turn==//
@@ -124,7 +135,7 @@ const drop = function () {
                         //==change the value of the element in the main array to be 'V'// 
                         bord[i][j] = "V";
                         //==calling the clicking function==//
-                        clicking(sword, true, "V");
+                        clicking(sword, true );
                         //==set the image background to the div ===//
                         image.setAttribute('src', 'images/vikings.gif');
                     }
@@ -140,24 +151,24 @@ const drop = function () {
 }//<--end of the function==//
 
 //====checking to win or drow===//
-const winGame = function (whoPlaying) {
+const winGame = function () {
     //====All caces of wining ====//
 
-    if ((bord[0][0] !== 0 && bord[0][0] === bord[0][1] && bord[0][0] === bord[0][2]) ||
-        (bord[1][0] !== 0 && bord[1][0] === bord[1][1] && bord[1][0] === bord[1][2]) ||
-        (bord[2][0] !== 0 && bord[2][0] === bord[2][1] && bord[2][0] === bord[2][2]) ||
+    if ((bord[0][0] === "V" && bord[0][0] === bord[0][1] && bord[0][0] === bord[0][2]) ||
+        (bord[1][0] === "V" && bord[1][0] === bord[1][1] && bord[1][0] === bord[1][2]) ||
+        (bord[2][0] === "V" && bord[2][0] === bord[2][1] && bord[2][0] === bord[2][2]) ||
 
-        (bord[0][0] !== 0 && bord[0][0] === bord[1][0] && bord[0][0] === bord[2][0]) ||
-        (bord[0][1] !== 0 && bord[0][1] === bord[1][1] && bord[0][1] === bord[2][1]) ||
-        (bord[0][2] !== 0 && bord[0][2] === bord[1][2] && bord[0][2] === bord[2][2]) ||
+        (bord[0][0] === "V" && bord[0][0] === bord[1][0] && bord[0][0] === bord[2][0]) ||
+        (bord[0][1] === "V" && bord[0][1] === bord[1][1] && bord[0][1] === bord[2][1]) ||
+        (bord[0][2] === "V" && bord[0][2] === bord[1][2] && bord[0][2] === bord[2][2]) ||
 
-        (bord[0][0] !== 0 && bord[0][0] === bord[1][1] && bord[0][0] === bord[2][2]) ||
-        (bord[0][2] !== 0 && bord[0][2] === bord[1][1] && bord[0][2] === bord[2][0])
+        (bord[0][0] === "V" && bord[0][0] === bord[1][1] && bord[0][0] === bord[2][2]) ||
+        (bord[0][2] === "V" && bord[0][2] === bord[1][1] && bord[0][2] === bord[2][0])
 
     ) {
 
         //==check vikings win===//
-        if (whoPlaying === 'V') {
+        // if (whoPlaying === 'V') {
 
             //== set opcity of 'X,O' table to 0.6=====//
             board.style.opacity = '0.6';
@@ -167,10 +178,25 @@ const winGame = function (whoPlaying) {
             setTimeout(fadeOut, 100);
             //==Adding score function==;;
             scoring('scoreSavedV');
-        }//<--end of check viking win==//
+             //==calling play again function==//
+             playAgain();
+             return;
+         }//<--end of check viking win ==//
 
         //==if cat win===//
-        if (whoPlaying === 'C') {
+        // if (whoPlaying === 'C') {
+    if ((bord[0][0] === "C" && bord[0][0] === bord[0][1] && bord[0][0] === bord[0][2]) ||
+        (bord[1][0] === "C" && bord[1][0] === bord[1][1] && bord[1][0] === bord[1][2]) ||
+        (bord[2][0] === "C" && bord[2][0] === bord[2][1] && bord[2][0] === bord[2][2]) ||
+
+        (bord[0][0] === "C" && bord[0][0] === bord[1][0] && bord[0][0] === bord[2][0]) ||
+        (bord[0][1] === "C" && bord[0][1] === bord[1][1] && bord[0][1] === bord[2][1]) ||
+        (bord[0][2] === "C" && bord[0][2] === bord[1][2] && bord[0][2] === bord[2][2]) ||
+
+        (bord[0][0] === "C" && bord[0][0] === bord[1][1] && bord[0][0] === bord[2][2]) ||
+        (bord[0][2] === "C" && bord[0][2] === bord[1][1] && bord[0][2] === bord[2][0])
+
+    ) {
             //==winning theme function===//
             winTheme(catLast, `one more cat just survived`, 'red');
             //===cahnge background image and edit the style====//
@@ -181,19 +207,21 @@ const winGame = function (whoPlaying) {
             intro.setAttribute('src', ' ');
             //==Adding score==//
             scoring('scoreSavedC');
-        }//<--end of check cat win==//
+             //==calling play again function==//
+             playAgain();
+             return;
+         }//<--end of check cat win==//
 
-        //==calling play again function==//
-        playAgain();
+       
 
 
-    }//<--end of checking all caces of win==// 
+    // }//<--end of checking all caces of win==// 
 
     //==check if the game is Draw==//
 
     if (bord[0][0] && bord[0][1] && bord[0][2] &&
         bord[1][0] && bord[1][1] && bord[1][2] &&
-        bord[2][0] && bord[2][1] && bord[2][2] !== 0) {
+        bord[2][0] && bord[2][1] && bord[2][2] ) {
         //===remove title===// 
         header.style.display = 'none';
         //===change text & color of win message then display it==//
@@ -202,6 +230,7 @@ const winGame = function (whoPlaying) {
         win.style.color = '#B5EDF9';
         //===play again function==//
         playAgain();
+        return;
 
     }//<--end of draw checking====//
     
@@ -215,7 +244,7 @@ const clicking = function (sond, player, val) {
     //==swich turn==//
     playerTurn = player;
     //==calling the win function with "C" parameitat==//
-    winGame(val);
+    winGame();
 }
 
 //====wining theme==//
@@ -314,23 +343,25 @@ const jenes = function(){
 //======Ceating AI ;) ======//
 
 
-// const ai = function (conter) {
-//     // console.log('ffdsf');
-//     let random1 = Math.floor(Math.random() * 3);
-//     let random2 = Math.floor(Math.random() * 3);
+const aifunction = function () {
+    // console.log('ffdsf');
+    let random1 = Math.floor(Math.random() * 3);
+    let random2 = Math.floor(Math.random() * 3);
 
-//     let imageq = document.querySelector(`#n${random1}${random2} img`);
-//     // console.log(imageq);
-
-//     if (bord[random1][random2] === 0) {
-//         bord[random1][random2] = "V";
-//         sword.play();
-//         imageq.setAttribute('src', 'images/vikings.gif');
-//         winGame('V');
-//     } else {
-//         ai();
-//     }
-// }
+    let imageq = document.querySelector(`#n${random1}${random2} img`);
+    // console.log(imageq);
+    console.log(conter);
+    if (bord[random1][random2] === 0) {
+        bord[random1][random2] = "V";
+        clicking(sword, true);
+        imageq.setAttribute('src', 'images/vikings.gif');  
+    } else {
+        
+        if(conter < 5){
+        aifunction();
+        }
+    }
+}
 
 
 
@@ -357,3 +388,11 @@ q9.addEventListener('click', drop);
 const end = performance.now();
 
 console.log(end - start);
+
+
+
+
+
+// bord[0][0] && bord[0][1] && bord[0][2] &&
+//         bord[1][0] && bord[1][1] && bord[1][2] &&
+//         bord[2][0] && bord[2][1] && bord[2][2] !== 0
