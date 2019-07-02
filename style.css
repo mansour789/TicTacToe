@@ -103,13 +103,19 @@ span{
     /* display: none; */
     position: absolute;
     top: 50%;
-    left: 40%;
+    left: 55%;
     font-size: 80px;
     color: white;
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 30px;
     padding: 10px 30px;
     font-family: 'Barriecito', cursive;
+}
+.playBtnC{
+   
+    top: 50%;
+    left: 10%;
+    
 }
 .playBtnAgain{
     display: none;

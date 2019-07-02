@@ -34,6 +34,8 @@ const catLast = document.querySelector('#catLast');
 const playBtn = document.querySelector(".playBtn");
 //play Again button//
 const playBtnAgain = document.querySelector('.playBtnAgain');
+//play Auto button//
+const playBtnC = document.querySelector('.playBtnC')
 
 //==scoring title==//
 const score = document.querySelector('.score');
@@ -67,8 +69,9 @@ const startGame = function () {
     document.querySelector('h2').classList = 'animated bounceOutRight';
     //==display the board to play==//
     board.style.display = 'block';
-    //==remove Play button==//
+    //==remove Play button and auto play button==//
     playBtn.classList += ' hinge';
+    playBtnC.classList += ' fadeOutLeftBig';
     //==change the music to be more scery!!==//
     intro.setAttribute('src', 'audio/startGame.mp3');
     //==remove the score from the screen==//
@@ -364,11 +367,16 @@ const aifunction = function () {
 }
 
 
-
+//==starting the AI mode function==//
+const startAI = function(){
+    AI = true;
+    startGame();
+}
 
 //==adding th click event to the buttons==//
 playBtn.addEventListener('click', startGame);
 playBtnAgain.addEventListener('click', restart);
+playBtnC.addEventListener('click', startAI);
 
 //==adding click event to the div's==//
 
