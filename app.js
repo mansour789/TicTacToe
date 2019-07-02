@@ -57,6 +57,7 @@ const q7 = document.querySelector('#n20');
 const q8 = document.querySelector('#n21');
 const q9 = document.querySelector('#n22');
 
+const catDance = document.querySelector('#dance');
 
 
 
@@ -70,7 +71,9 @@ const startGame = function () {
     playBtn.classList += ' hinge';
     //==change the music to be more scery!!==//
     intro.setAttribute('src', 'audio/startGame.mp3');
+    //==remove the score from the screen==//
     score.style.display = 'none';
+    
 }
 
 //==when click playAgain button==//
@@ -105,27 +108,28 @@ const drop = function () {
 
                 //== if the Cat turn ==//
                 if (playerTurn) {
-                    //==if the spot has been clicked is empty==//
+                    //==if the spot that has been clicked = 0 means it's empty==//
                     if (bord[i][j] === 0) {
                         //==change the value of the element in the main array to be 'C'// 
-                        bord[i][j] = "C"
+                        bord[i][j] = "C";
+                        //==calling the clicking function==//
                         clicking(cat, false, "C")
                         //==set the image background to the div ===//
                         image.setAttribute('src', 'images/cat.gif');
                     }//<--end of Cat turn==//
 
                 } else { //==if(playerTurn = false) means viking turn==//
-                    //==if the spot has been clicked is empty==//
+                    //==if the spot that has been clicked = 0 means it's empty==//
                     if (bord[i][j] === 0) {
                         //==change the value of the element in the main array to be 'V'// 
-                        bord[i][j] = "V"
-                        clicking(sword, true, "V")
+                        bord[i][j] = "V";
+                        //==calling the clicking function==//
+                        clicking(sword, true, "V");
                         //==set the image background to the div ===//
                         image.setAttribute('src', 'images/vikings.gif');
+                    }
 
-
-                    }//<--end of Vikings turn==//
-                }
+                }//<--end of Vikings turn==//
             }//<--end of the if statment==//
 
         }//<--end of the inner loop==//
@@ -133,7 +137,7 @@ const drop = function () {
     }//<--end of the big loop==//
 
 
-}//--end of the function==//
+}//<--end of the function==//
 
 //====checking to win or drow===//
 const winGame = function (whoPlaying) {
@@ -152,7 +156,7 @@ const winGame = function (whoPlaying) {
 
     ) {
 
-        //==if vikings win===//
+        //==check vikings win===//
         if (whoPlaying === 'V') {
 
             //== set opcity of 'X,O' table to 0.6=====//
@@ -163,23 +167,23 @@ const winGame = function (whoPlaying) {
             setTimeout(fadeOut, 100);
             //==Adding score function==;;
             scoring('scoreSavedV');
-        }
+        }//<--end of check viking win==//
 
         //==if cat win===//
         if (whoPlaying === 'C') {
             //==winning theme function===//
             winTheme(catLast, `one more cat just survived`, 'red');
             //===cahnge background image and edit the style====//
-            document.querySelector('html').style.background = 'url(images/catWin.jpg) no-repeat center center fixed';
-            document.querySelector('html').style.backgroundSize = 'cover';
+            document.querySelector('body').style.background = 'url(images/catWin.jpg) no-repeat center center fixed';
+            document.querySelector('body').style.backgroundSize = 'cover';
+            catDance.style.display = 'block';
             //===stope the background music====//
             intro.setAttribute('src', ' ');
             //==Adding score==//
             scoring('scoreSavedC');
+        }//<--end of check cat win==//
 
-        }
-
-
+        //==calling play again function==//
         playAgain();
 
 
@@ -200,7 +204,7 @@ const winGame = function (whoPlaying) {
         playAgain();
 
     }//<--end of draw checking====//
-    // } //<--end of checking win
+    
 } //<-- end of the win function===//
 
 
@@ -212,6 +216,19 @@ const clicking = function (sond, player, val) {
     playerTurn = player;
     //==calling the win function with "C" parameitat==//
     winGame(val);
+}
+
+//====wining theme==//
+const winTheme = function (sond, inText, color) {
+    //====sound effect==//
+    sond.play();
+    //===remove title===//
+    header.style.display = 'none';
+    //===change text of win message then display it==//
+    win.innerText = inText;
+    win.style.display = 'block';
+    //==change color for win message==//
+    win.style.color = color;
 }
 
 
@@ -239,58 +256,6 @@ const fadeOut = function () {
     }
 }
 
-
-//======Ceating AI ;) ======//
-
-
-const ai = function (conter) {
-    // console.log('ffdsf');
-    let random1 = Math.floor(Math.random() * 3);
-    let random2 = Math.floor(Math.random() * 3);
-
-    let imageq = document.querySelector(`#n${random1}${random2} img`);
-    // console.log(imageq);
-
-    if (bord[random1][random2] === 0) {
-        bord[random1][random2] = "V";
-        sword.play();
-        imageq.setAttribute('src', 'images/vikings.gif');
-        winGame('V');
-    } else {
-        ai();
-    }
-}
-
-//=====play again function===//
-const playAgain = function () {
-    //===display play again button===//
-    playBtnAgain.style.display = 'block';
-    //==edit the score==//
-    catScore.innerText = sessionStorage.getItem('scoreSavedC');
-    vikingScore.innerText = sessionStorage.getItem('scoreSavedV');
-    //==display the score==//
-    score.style.display = "block";
-}
-
-
-
-
-
-//====wining theme==//
-const winTheme = function (sond, inText, color) {
-    //====sound effect==//
-    sond.play();
-    //===remove title===//
-    header.style.display = 'none';
-    //===change text of win message then display it==//
-    win.innerText = inText;
-    win.style.display = 'block';
-    //==change color for win message==//
-    win.style.color = color;
-}
-
-
-
 //===storing the score===//
 const scoring = function (whoScore) {
 
@@ -307,6 +272,67 @@ const scoring = function (whoScore) {
     }
 
 }
+
+//=====play again function===//
+const playAgain = function () {
+    //===display play again button===//
+    playBtnAgain.style.display = 'block';
+    //==edit the score==//
+    catScore.innerText = sessionStorage.getItem('scoreSavedC');
+    vikingScore.innerText = sessionStorage.getItem('scoreSavedV');
+    //==display the score==//
+    score.style.display = "block";
+}
+
+
+//==playing with the jenes===//
+const jenes = function(){
+    let jene = document.querySelectorAll('.jene');
+    
+    for (let i = 0; i < jene.length; i++) {
+        let random1 = Math.floor(Math.random() * 70);     
+         let random2 = Math.floor(Math.random() * 70);
+
+        jene[i].style.display = 'block';
+        jene[i].style.top = `${random1}%`;
+        jene[i].style.left = `${random2}%`;
+        jene[i].style.width = `${random2}%`;
+        jene[i].style.height = `${random1}%`
+
+        
+    }
+}
+
+
+
+
+
+
+
+
+
+//======Ceating AI ;) ======//
+
+
+// const ai = function (conter) {
+//     // console.log('ffdsf');
+//     let random1 = Math.floor(Math.random() * 3);
+//     let random2 = Math.floor(Math.random() * 3);
+
+//     let imageq = document.querySelector(`#n${random1}${random2} img`);
+//     // console.log(imageq);
+
+//     if (bord[random1][random2] === 0) {
+//         bord[random1][random2] = "V";
+//         sword.play();
+//         imageq.setAttribute('src', 'images/vikings.gif');
+//         winGame('V');
+//     } else {
+//         ai();
+//     }
+// }
+
+
 
 
 //==adding th click event to the buttons==//
