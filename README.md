@@ -17,23 +17,23 @@ Try to beat the Viking [click here](https://mansour789.github.io/TicTacToe/) to 
 * You are not able to continue playing once you win, lose, or tie.
 * You be able to play the game again without refreshing the page.
 
-## wireframe 
+## Wireframe 
 
-[click here](https://wireframe.cc/pro/pp/64c2c7fcd258760)to see the wireframe of the game.
+[Click here](https://wireframe.cc/pro/pp/64c2c7fcd258760) to see the wireframe of the game.
 
-## resources
+## Resources
 I used some free resources and that only for a personal used.
 * https://giphy.com.
 * https://unsplash.com
 * http://soundbible.com
 * https://www.zapsplat.com
 
-## something to add
-1. online playing.
-2. add more themes.
-3. add more breakpoints.
+## Something to add
+1. Online playing.
+2. Add more themes.
+3. Add more breakpoints.
 
-## how the code work
+## How the code work
 
 I made a 2D array and when a user clicks on a box the clicking function executes. This function changes the value of the 2D array index then loop through the array to check if someone won.
 whin's find someone won it will stop the playing and it will add the theme for wining.
