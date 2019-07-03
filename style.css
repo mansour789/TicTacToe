@@ -180,8 +180,9 @@ span{
     }
     .playBtn{
         /* display: none; */
-        margin-top: 10%;
-        margin-left: -25%;
+        margin-top: 15%;
+        /* margin-left: -29%; */
+        font-size: 20px;
     }
     #board{
         margin-top: -40%;
@@ -230,6 +231,9 @@ span{
     .three{
         margin-top: -50%;
         margin-left: -80%;
+    }
+    .playBtnC{
+        margin-left: -8%;
     }
     
 }
