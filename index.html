@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,72 +8,62 @@
     <link href="https://fonts.googleapis.com/css?family=Barriecito&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="animate.css">
     <link rel="stylesheet" href="style.css">
-    <title>hh</title>
+    <title>Tic Tac Toe</title>
 </head>
+
 <body>
+
     <header>
         <h1 class="title animated fadeInDownBig">Tic Tac Toe</h1>
-        <h2 class="animated fadeInLeftBig">In a different world full of Cats and Vikings the wise man has said:<br> <span> "THERE'S MORE THAN ONE WAY TO SKIN A CAT" "U.B"</span>
-               <br> Try to rescue this cat from a powerful Viking. </h2>
-        
+        <h2 class="animated fadeInLeftBig">In a different world full of Cats and Vikings the wise man has said:<br>
+            <span> "THERE'S MORE THAN ONE WAY TO SKIN A CAT" "U.B"</span>
+            <br> Try to rescue this cat from a powerful Viking. </h2>
     </header>
+    <main>
+        <iframe src="audio/intro.mp3" allow="autoplay" id="intro"></iframe>
 
-    
-    <iframe src="audio/intro.mp3" allow="autoplay"  id="intro">
-        </iframe> 
-        
-        <section class="ghoust">
-            <img class="jene" src="images/ghost.png">
-            <img class="jene" src="images/ghost.png">
-            <img class="jene" src="images/ghost.png">
-            <img class="jene" src="images/ghost.png">
+        <div id="board" class="animated zoomIn">
+            <div id="n00" class="box"><img /></div>
+            <div id="n01" class="box"><img /></div>
+            <div id="n02" class="box"><img /></div>
+
+            <div id="n10" class="box"><img /></div>
+            <div id="n11" class="box"><img /></div>
+            <div id="n12" class="box"><img /></div>
+
+            <div id="n20" class="box"><img /></div>
+            <div id="n21" class="box"><img /></div>
+            <div id="n22" class="box"><img /></div>
+
+        </div>
+        <section class="endingGame">
+            <img id="dance" src="images/catDance.gif">
+            <img class="viking" src="images/blood.png">
+            <img class="viking one" src="images/blood.png">
+            <img class="viking two" src="images/blood.png">
+            <img class="viking three" src="images/blood.png">
+            <h1 class="title win"></h1>
         </section>
 
-    
-        <main id="board" class="animated zoomIn">
-            <div id="n00" class="box" ><img /></div>
-            <div id="n01" class="box" ><img /></div>
-            <div id="n02" class="box" ><img /></div>
-
-            <div id="n10" class="box" ><img /></div>
-            <div id="n11" class="box" ><img /></div>
-            <div id="n12" class="box" ><img /></div>
-
-            <div id="n20" class="box" ><img /></div>
-            <div id="n21" class="box" ><img /></div>
-            <div id="n22" class="box" ><img /></div>
-            
-        </main>
-        <section class="endingGame">
-         <img id="dance" src="images/catDance.gif">
-        <img class="viking" src="images/blood.png">
-        <img class="viking one" src="images/blood.png">
-        <img class="viking two" src="images/blood.png">
-        <img class="viking three" src="images/blood.png">
-        <h1 class="title win"></h1>
-   
-    </section>
-    <button class="playBtn animated fadeInRightBig">PLAY 1X1</button>
-    <button class="playBtnC playBtn animated fadeInLeftBig">AUTO PLAY</button>
-    <button class="playBtnAgain animated fadeInRightBig">PLAY AGAIN</button>
-    <section class="container"></section>
-    <section >
-        <button class=" score animated fadeInLeftBig">cat:<span id="catScore">1</span> X viking:<span id="vikingScore">2</span></button>
-        <!-- <h1></h1>
-        <h1></h1> -->
-    </section>
-    </section>
+        <section>
+            <button class="playBtn animated fadeInRightBig">PLAY 1X1</button>
+            <button class="playBtnC playBtn animated fadeInLeftBig">AUTO PLAY</button>
+            <button class="playBtnAgain animated fadeInRightBig">PLAY AGAIN</button>
+         </section>
+        <section>
+            <button class=" score animated fadeInLeftBig">cat:<span id="catScore">1</span> X viking:<span
+                    id="vikingScore">2</span></button>
+        </section>
+        
+    </main>
     <section class="audio">
-            <audio id="sword" src="audio/swordClick.mp3"></audio>
-            <audio id="swordLast" src="audio/lastSword.mp3"></audio>
-            <audio id="cat" src="audio/cat.mp3"></audio>
-            <audio id="catLast" src="audio/catLast.mp3" loop="loop"></audio>
+        <audio id="sword" src="audio/swordClick.mp3"></audio>
+        <audio id="swordLast" src="audio/lastSword.mp3"></audio>
+        <audio id="cat" src="audio/cat.mp3"></audio>
+        <audio id="catLast" src="audio/catLast.mp3" loop="loop"></audio>
     </section>
 
     <script src="app.js"></script>
 </body>
+
 </html>
-
-
-
-
