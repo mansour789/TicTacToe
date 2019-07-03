@@ -1,3 +1,18 @@
+var firebaseConfig = {
+    apiKey: "AIzaSyAQCGZrTtiRNiNkH-MLDFRvO5mbOWoHYiI",
+    authDomain: "tictactoeviking.firebaseapp.com",
+    databaseURL: "https://tictactoeviking.firebaseio.com",
+    projectId: "tictactoeviking",
+    storageBucket: "",
+    messagingSenderId: "211771613646",
+    appId: "1:211771613646:web:2d938359ee923f98"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+
+  //========FIREBASE=====//
+let database  =  firebase.database();
+
 const start = performance.now();
 //== the main array==//
 let bord = [
@@ -83,7 +98,8 @@ const startGame = function () {
 const restart = function () {
     window.location.reload(true);
 }
-
+let place;
+let mg ;
 //==check of AI mode working===//
 let AI = false;
 let conter = 0;
@@ -117,9 +133,12 @@ const drop = function () {
                     if (bord[i][j] === 0) {
                         //==change the value of the element in the main array to be 'C'// 
                         bord[i][j] = "C";
+                        place = divPressed;
                         //==set the image background to the div ===//
                         image.setAttribute('src', 'images/cat.gif');
 
+                        mg = image.setAttribute('src', 'images/cat.gif');
+                        // sentData();
                         conter++;
                         //==calling the clicking function==//
                         if(!AI){
@@ -137,10 +156,12 @@ const drop = function () {
                     if (bord[i][j] === 0) {
                         //==change the value of the element in the main array to be 'V'// 
                         bord[i][j] = "V";
+                        place = divPressed;
                         //==calling the clicking function==//
                         clicking(sword, true );
                         //==set the image background to the div ===//
                         image.setAttribute('src', 'images/vikings.gif');
+                        // sentData();
                     }
 
                 }//<--end of Vikings turn==//
@@ -241,7 +262,7 @@ const winGame = function () {
 
 
 //====drawing image and play sound when clicked===//
-const clicking = function (sond, player, val) {
+const clicking = function (sond, player) {
     //==play sound effect==//
     sond.play();
     //==swich turn==//
@@ -341,8 +362,6 @@ const jenes = function(){
 
 
 
-
-
 //======Ceating AI ;) ======//
 
 
@@ -353,7 +372,7 @@ const aifunction = function () {
 
     let imageq = document.querySelector(`#n${random1}${random2} img`);
     // console.log(imageq);
-    console.log(conter);
+    // console.log(conter);
     if (bord[random1][random2] === 0) {
         bord[random1][random2] = "V";
         clicking(sword, true);
@@ -372,6 +391,60 @@ const startAI = function(){
     AI = true;
     startGame();
 }
+
+
+//==============firebase=======//
+console.log(database);
+
+console.log(firebase);
+
+let keyPlay;
+
+const sentData = function(){
+
+let ref = database.ref('game');
+let send = {
+    bordArray: bord,
+    divPressed: place,
+    photo: document.querySelector(`${place} img`)
+    }
+let result = ref.push(send);
+keyPlay = result.key;
+console.log(result.key);
+
+}
+const gittingData = function(){
+
+    let ref = database.ref('game');
+
+ref.on('value', gotData, errData);
+}
+
+
+const gotData = function(data){
+    // console.log(data.val());
+    let games = data.val();
+    let keys = Object.keys(games);
+    console.log(keys);
+    for (let i = 0; i < keys.length; i++) {
+
+        const k = keys[i];
+        const bordArray = games[k].bordArray;
+        const  divPressed = games[k].divPressed;
+        const  photo = games[k].photo;
+        console.log(bordArray, divPressed, photo);
+        // clickFun
+        
+    }
+}
+const errData = function(err){
+    console.log('Errrr' + err);
+}
+gittingData();
+
+
+
+
 
 //==adding th click event to the buttons==//
 playBtn.addEventListener('click', startGame);
@@ -401,6 +474,3 @@ console.log(end - start);
 
 
 
-// bord[0][0] && bord[0][1] && bord[0][2] &&
-//         bord[1][0] && bord[1][1] && bord[1][2] &&
-//         bord[2][0] && bord[2][1] && bord[2][2] !== 0

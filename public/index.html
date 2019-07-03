@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="animate.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Tic Tac Toe</title>
+
+   
+    </head>
+  <body>
+      <header>
+          <h1 class="title animated fadeInDownBig">Tic Tac Toe</h1>
+          <h2 class="animated fadeInLeftBig">In a different world full of Cats and Vikings the wise man has said:<br> <span> "THERE'S MORE THAN ONE WAY TO SKIN A CAT" "U.B"</span>
+                 <br> Try to rescue this cat from a powerful Viking. </h2>
+          
+      </header>
+  
+      
+      <iframe src="audio/intro.mp3" allow="autoplay"  id="intro">
+          </iframe> 
+          
+          <main id="board" class="animated zoomIn">
+              <div id="n00" class="box" ><img /></div>
+              <div id="n01" class="box" ><img /></div>
+              <div id="n02" class="box" ><img /></div>
+  
+              <div id="n10" class="box" ><img /></div>
+              <div id="n11" class="box" ><img /></div>
+              <div id="n12" class="box" ><img /></div>
+  
+              <div id="n20" class="box" ><img /></div>
+              <div id="n21" class="box" ><img /></div>
+              <div id="n22" class="box" ><img /></div>
+              
+          </main>
+          <section class="endingGame">
+           <img id="dance" src="images/catDance.gif">
+          <img class="viking" src="images/blood.png">
+          <img class="viking one" src="images/blood.png">
+          <img class="viking two" src="images/blood.png">
+          <img class="viking three" src="images/blood.png">
+          <h1 class="title win"></h1>
+     
+      </section>
+      <button class="playBtn animated fadeInRightBig">PLAY 1X1</button>
+      <button class="playBtnC playBtn animated fadeInLeftBig">AUTO PLAY</button>
+      <button class="playBtnAgain animated fadeInRightBig">PLAY AGAIN</button>
+      <section class="container"></section>
+      <section >
+          <button class=" score animated fadeInLeftBig">cat:<span id="catScore">1</span> X viking:<span id="vikingScore">2</span></button>
+         
+      </section>
+      </section>
+      <section class="audio">
+              <audio id="sword" src="audio/swordClick.mp3"></audio>
+              <audio id="swordLast" src="audio/lastSword.mp3"></audio>
+              <audio id="cat" src="audio/cat.mp3"></audio>
+              <audio id="catLast" src="audio/catLast.mp3" loop="loop"></audio>
+      </section>
+
+      <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-firestore.js"></script> -->
+      <!-- <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-auth.js"></script> -->
+    <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+  
+      <script src="app.js"></script>
+
+    
+  </body>
+</html>

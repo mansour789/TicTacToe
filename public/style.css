@@ -6,6 +6,7 @@ body{
     background-size: cover;
     
     font-family: 'Barriecito', cursive;  
+    /* display: none; */
 }
 
 #intro{
@@ -154,14 +155,7 @@ span{
     opacity: 0.5;
 }
 
-.ghoust{
 
-}
-.jene{
-    display: none;
-    position: absolute;
-    opacity: 0.7;
-}
 
 
 @media(max-width: 480px){
@@ -180,8 +174,14 @@ span{
     }
     .playBtn{
         /* display: none; */
+        font-size: 20px;
         margin-top: 10%;
-        margin-left: -25%;
+        margin-left: 8%;
+    }
+    .playBtnC{
+   
+        margin-top: 10%;
+        margin-left: -5%;
     }
     #board{
         margin-top: -40%;
@@ -230,6 +230,11 @@ span{
     .three{
         margin-top: -50%;
         margin-left: -80%;
+    }
+    #dance{
+        top: 20%;
+        left: 10%;
+        width: 70%;
     }
     
 }
