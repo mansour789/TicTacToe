@@ -22,7 +22,9 @@ let bord = [
 ];
 
 //==storing the elements that we want to edit==//
+let yesOrNo = "Yes";
 
+// console.log('the real value in top page ==>' + yesOrNo);
 //background music//
 let intro = document.querySelector('#intro');
 
@@ -108,6 +110,9 @@ let playerTurn = true;
 //===when player click for playing==//
 const drop = function () {
 
+
+
+
     //==save the id of the div that clicked==//
     let divPressed = this.id;
     //==save the image of the div that clicked==//
@@ -138,7 +143,7 @@ const drop = function () {
                         image.setAttribute('src', 'images/cat.gif');
 
                         mg = image.setAttribute('src', 'images/cat.gif');
-                        // sentData();
+                        sentData();
                         conter++;
                         //==calling the clicking function==//
                         if(!AI){
@@ -161,7 +166,7 @@ const drop = function () {
                         clicking(sword, true );
                         //==set the image background to the div ===//
                         image.setAttribute('src', 'images/vikings.gif');
-                        // sentData();
+                        sentData();
                     }
 
                 }//<--end of Vikings turn==//
@@ -266,7 +271,7 @@ const clicking = function (sond, player) {
     //==play sound effect==//
     sond.play();
     //==swich turn==//
-    playerTurn = player;
+    // playerTurn = player;
     //==calling the win function with "C" parameitat==//
     winGame();
 }
@@ -394,49 +399,104 @@ const startAI = function(){
 
 
 //==============firebase=======//
-console.log(database);
+// console.log(database);
 
-console.log(firebase);
+// console.log(firebase);
 
 let keyPlay;
 
+let whosPlay= true
+
 const sentData = function(){
 
-let ref = database.ref('game');
+let ref = database.ref('game/-LiqkW008fUSpDGranC-');
+// console.log("send", bord)
 let send = {
     bordArray: bord,
     divPressed: place,
-    photo: document.querySelector(`${place} img`)
+    turn: playerTurn,
+    canPlay: yesOrNo
     }
-let result = ref.push(send);
-keyPlay = result.key;
-console.log(result.key);
+let result = ref.update(send);
+// keyPlay = result.key;
+// console.log(result.key);
+console.log("canPlaySent {{" + yesOrNo);
 
 }
 const gittingData = function(){
 
-    let ref = database.ref('game');
+    let ref = database.ref('game/-LiqkW008fUSpDGranC-');
 
 ref.on('value', gotData, errData);
 }
 
 
 const gotData = function(data){
+    
+
     // console.log(data.val());
     let games = data.val();
+    // console.log("Get Games", games);
     let keys = Object.keys(games);
-    console.log(keys);
-    for (let i = 0; i < keys.length; i++) {
+    // console.log("Get Keys",keys);
+    if(games.divPressed){
+        // console.log("Get divPressed",games.divPressed)
+        const pressedCell = document.querySelector(`#${games.divPressed}`)
+        // console.log("pressed Online", pressedCell)
 
-        const k = keys[i];
-        const bordArray = games[k].bordArray;
-        const  divPressed = games[k].divPressed;
-        const  photo = games[k].photo;
-        console.log(bordArray, divPressed, photo);
-        // clickFun
+        
+         if(yesOrNo == 'Yes'){
+            
+                q1.addEventListener('click', drop);
+                q2.addEventListener('click', drop);
+                q3.addEventListener('click', drop);
+                q4.addEventListener('click', drop);
+                q5.addEventListener('click', drop);
+                q6.addEventListener('click', drop);
+                q7.addEventListener('click', drop);
+                q8.addEventListener('click', drop);
+                q9.addEventListener('click', drop);
+                yesOrNo = 'No';
+                drop.call(pressedCell);
+            }else if (yesOrNo == 'No'){
+                q1.removeEventListener('click', drop);
+                q2.removeEventListener('click', drop);
+                q3.removeEventListener('click', drop);
+                q4.removeEventListener('click', drop);
+                q5.removeEventListener('click', drop);
+                q6.removeEventListener('click', drop);
+                q7.removeEventListener('click', drop);
+                q8.removeEventListener('click', drop);
+                q9.removeEventListener('click', drop);
+                yesOrNo = 'Yes';
+                drop.call(pressedCell);
+            }
+
+
+
+
+
+
+
+
+        
+        playerTurn = !games.turn;
+        yesOrNo = games.canPlay;
+        console.log("canPlayReseaved{{" + yesOrNo);
+    }
+    
+
+    
+    // for (let i = 0; i < keys.length; i++) {
+
+    //     const k = keys[i];
+    //     const bordArray = games[k].bordArray;
+    //     const  divPressed = games[k].divPressed;
+    //     console.log(bordArray, divPressed);
+    //     // clickFun
         
     }
-}
+
 const errData = function(err){
     console.log('Errrr' + err);
 }
@@ -454,15 +514,15 @@ playBtnC.addEventListener('click', startAI);
 //==adding click event to the div's==//
 
 
-q1.addEventListener('click', drop);
-q2.addEventListener('click', drop);
-q3.addEventListener('click', drop);
-q4.addEventListener('click', drop);
-q5.addEventListener('click', drop);
-q6.addEventListener('click', drop);
-q7.addEventListener('click', drop);
-q8.addEventListener('click', drop);
-q9.addEventListener('click', drop);
+// q1.addEventListener('click', drop);
+// q2.addEventListener('click', drop);
+// q3.addEventListener('click', drop);
+// q4.addEventListener('click', drop);
+// q5.addEventListener('click', drop);
+// q6.addEventListener('click', drop);
+// q7.addEventListener('click', drop);
+// q8.addEventListener('click', drop);
+// q9.addEventListener('click', drop);
 
 
 
@@ -474,3 +534,5 @@ console.log(end - start);
 
 
 
+// if (yesOrNo == 'No'){
+//     
