@@ -414,7 +414,7 @@ let ref = database.ref('game/-LiqkW008fUSpDGranC-');
 let send = {
     bordArray: bord,
     divPressed: place,
-    turn: playerTurn,
+    // turn: playerTurn,
     canPlay: yesOrNo
     }
 let result = ref.update(send);
@@ -471,13 +471,6 @@ const gotData = function(data){
                 yesOrNo = 'Yes';
                 drop.call(pressedCell);
             }
-
-
-
-
-
-
-
 
         
         playerTurn = !games.turn;
