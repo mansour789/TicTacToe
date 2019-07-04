@@ -27,6 +27,7 @@ I used some free resources and that only for a personal used.
 * https://unsplash.com
 * http://soundbible.com
 * https://www.zapsplat.com
+* https://daneden.github.io/animate.css/
 
 ## Something to add
 1. Online playing.
